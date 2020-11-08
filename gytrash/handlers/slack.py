@@ -1,5 +1,6 @@
 from slack_sdk.web import WebClient
 from logging import StreamHandler
+import logging
 import os
 
 
@@ -21,7 +22,24 @@ class SlackHandler(StreamHandler):
         response = self.slack_web_client.chat_postMessage(**slack_payload)
 
     def emit(self, message: str):
+        assert isinstance(message, logging.LogRecord)
+        print("LoggingHandler received LogRecord: {}".format(message))
+
         self.format(message)
+
+        # List of LogRecord attributes expected when reading the
+        # documentation of the logging module:
+
+        expected_attributes = (
+            "args,asctime,created,exc_info,filename,funcName,levelname,"
+            "levelno,lineno,module,msecs,message,msg,name,pathname,"
+            "process,processName,relativeCreated,stack_info,thread,threadName"
+        )
+
+        for ea in expected_attributes.split(","):
+            if not hasattr(message, ea):
+                print("UNEXPECTED: LogRecord does not have the '{}' field!".format(ea))
+
         self._send_log(message, self.channel)
 
 
