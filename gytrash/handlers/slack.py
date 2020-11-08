@@ -21,6 +21,7 @@ class SlackHandler(StreamHandler):
         response = self.slack_web_client.chat_postMessage(**slack_payload)
 
     def emit(self, message: str):
+        self.format(message)
         self._send_log(message, self.channel)
 
 
