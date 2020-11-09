@@ -29,6 +29,8 @@ def setup_logging(
         "%(asctime)s %(name)s[%(process)d] %(module)s: %(levelname)s %(message)s"
     )
 
+    generic_formatter = logging.Formatter(log_format)
+
     coloredlogs.install(level=log_level, logger=log, fmt=log_format)
     log.debug(f"runway log level: {log.getEffectiveLevel()}")
 
@@ -40,6 +42,7 @@ def setup_logging(
 
     if log_to_slack:
         sh = slack.SlackHandler(slack_log_channel)
+        sh.setFormatter(generic_formatter)
         sh.setLevel(slack_log_level)
         log.addHandler(sh)
 
