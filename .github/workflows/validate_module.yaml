@@ -37,40 +37,23 @@ jobs:
         uses: pypa/gh-action-pypi-publish@master
         with:
           password: ${{ secrets.GYTRASH_PYPI_API_TOKEN }}
-      - name: Test env
-        run: |
-          echo ${{ env.CURRENT_VERSION }}
-      # - name: Update resources
-      #         uses: test-room-7/action-update-file@v1
-      #         with:
-      #             file-path: setup.py
-      #             commit-msg: Bumped version
-      #             github-token: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Bump version and push tag
-      #   id: tag_version
-      #   uses: mathieudutour/github-tag-action@v5.2
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     custom_tag: ${{ env.CURRENT_VERSION }}
-      # - name: Build a binary wheel and a source tarball
-      #   run: >-
-      #     python -m
-      #     build
-      #     --sdist
-      #     --wheel
-      #     --outdir dist/
-      # .
-      # - name: Bump version and push tag
-      #   id: tag_version
-      #   uses: mathieudutour/github-tag-action@v5.2
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     default_bump: "patch"
-      # - name: Create a GitHub release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ steps.tag_version.outputs.new_tag }}
-      #     release_name: Release ${{ steps.tag_version.outputs.new_tag }}
-      #     body: ${{ steps.tag_version.outputs.changelog }}
+      - name: Update resources
+        uses: test-room-7/action-update-file@v1
+        with:
+          file-path: setup.py
+          commit-msg: Bumped version to ${{ env.CURRENT_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          custom_tag: ${{ env.CURRENT_VERSION }}
+      - name: Create a GitHub release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
