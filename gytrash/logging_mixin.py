@@ -1,5 +1,4 @@
 import logging
-from logging import Logger
 
 
 class LoggingMixin:
@@ -10,7 +9,7 @@ class LoggingMixin:
         self._set_context(context)
 
     @property
-    def log(self) -> Logger:
+    def log(self) -> logging.Logger:
         """ A logger object.
         Returns:
             Logger
@@ -18,6 +17,9 @@ class LoggingMixin:
         self._log = logging.getLogger(
             self.__class__.__module__ + "." + self.__class__.__name__
         )
+        print("Test logging mixin")
+        print("Test logging mixin")
+        self.log.setup_logging(log_level=10)
         return self._log
 
     def _set_context(self, context):

@@ -16,6 +16,9 @@ repo_path = os.path.abspath(os.path.dirname(__file__))
 
 packages = find_packages(exclude=("examples",))
 
+with open("requirements.txt") as f:
+    install_requires = [line for line in f if "==" in line]
+
 about = {}
 with open(os.path.join(repo_path, "gytrash", "__about__.py"), "r", "utf-8") as f:
     exec(f.read(), about)
@@ -36,7 +39,7 @@ setup(
     package_data={"": ["*.cwl", "*.yaml"]},
     include_package_data=True,
     python_requires=">=3.7",
-    install_requires=["coloredlogs==14.0", "slack-sdk==3.0.0b1"],
+    install_requires=install_requires,
     license=about["__license__"],
     zip_safe=False,
     classifiers=[

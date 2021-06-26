@@ -1,0 +1,50 @@
+name: Build and Deploy Gytrash CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install pypa/build
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: execute version script # run the run.py to get the latest data
+        run: |
+          python -c 'import gytrash.__about__; print(about.version);'
+      # - name: Install pypa/build
+      #   run: >-
+      #     python -m
+      #     pip install
+      #     build
+      #     --user
+      # - name: Build a binary wheel and a source tarball
+      #   run: >-
+      #     python -m
+      #     build
+      #     --sdist
+      #     --wheel
+      #     --outdir dist/
+      # .
+      # - name: Bump version and push tag
+      #   id: tag_version
+      #   uses: mathieudutour/github-tag-action@v5.2
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     default_bump: "patch"
+      # - name: Create a GitHub release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ steps.tag_version.outputs.new_tag }}
+      #     release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+      #     body: ${{ steps.tag_version.outputs.changelog }}

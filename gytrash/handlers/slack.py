@@ -5,10 +5,13 @@ import os
 
 
 class SlackHandler(StreamHandler):
-    def __init__(self, channel: str):
+    def __init__(self, channel: str, slack_bot_token: str = None):
         StreamHandler.__init__(self)
         # Initialize a Web API client
-        self.slack_web_client = WebClient(token=os.environ["SLACK_BOT_TOKEN"])
+        if slack_bot_token:
+            self.slack_web_client = WebClient(token=slack_bot_token)
+        else:
+            self.slack_web_client = WebClient(token=os.environ["SLACK_BOT_TOKEN"])
         self.channel = channel
 
     def _send_log(self, message: str, channel: str):
