@@ -17,7 +17,7 @@ class LoggingMixin:
         self._log = logging.getLogger(
             self.__class__.__module__ + "." + self.__class__.__name__
         )
-        self.log.setup_logging(log_level=10)
+        # self.log.setup_logging(log_level=10)
         return self._log
 
     def _set_context(self, context):
