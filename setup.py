@@ -24,7 +24,7 @@ with open("README.md", "r", "utf-8") as f:
 
 setup(
     name=about["__title__"],
-    version="0.0.8",
+    version="0.0.9",
     description=about["__description__"],
     long_description=readme,
     long_description_content_type="text/markdown",
