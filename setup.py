@@ -10,8 +10,6 @@ from codecs import open
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
-from gytrash.__about__ import version
-
 repo_path = os.path.abspath(os.path.dirname(__file__))
 
 packages = find_packages(exclude=("examples",))
@@ -27,7 +25,7 @@ with open("README.md", "r", "utf-8") as f:
 
 setup(
     name=about["__title__"],
-    version=version,
+    version="0.0.5",
     description=about["__description__"],
     long_description=readme,
     long_description_content_type="text/markdown",
@@ -40,6 +38,7 @@ setup(
     include_package_data=True,
     python_requires=">=3.7",
     install_requires=install_requires,
+    setup_requires=install_requires,
     license=about["__license__"],
     zip_safe=False,
     classifiers=[
