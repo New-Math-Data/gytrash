@@ -25,11 +25,9 @@ jobs:
           echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
       - name: Install pypa/build
         run: |
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          python -m pip install build --user
+          pip install build --user
       - name: Build a binary wheel and a source tarball
         run: |
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           python -m build --sdist --wheel --outdir dist/ .
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@master
