@@ -27,11 +27,25 @@ jobs:
         run: |
           pip install build
           python -m build --sdist --wheel --outdir dist/ .
-      - name: Publish distribution 📦 to Test PyPI
+      # - name: Publish distribution 📦 to Test PyPI
+      #   uses: pypa/gh-action-pypi-publish@master
+      #   with:
+      #     password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+      #     repository_url: https://test.pypi.org/legacy/
+      - name: Publish distribution 📦 to PyPI
+        if: startsWith(github.ref, 'refs/tags')
         uses: pypa/gh-action-pypi-publish@master
         with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
+          password: ${{ secrets.GYTRASH_PYPI_API_TOKEN }}
+      - name: Test env
+        run: |
+          echo ${{ env.CURRENT_VERSION }}
+      # - name: Update resources
+      #         uses: test-room-7/action-update-file@v1
+      #         with:
+      #             file-path: setup.py
+      #             commit-msg: Bumped version
+      #             github-token: ${{ secrets.GITHUB_TOKEN }}
       # - name: Bump version and push tag
       #   id: tag_version
       #   uses: mathieudutour/github-tag-action@v5.2
