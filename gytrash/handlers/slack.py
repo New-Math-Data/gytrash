@@ -15,6 +15,7 @@ class SlackHandler(StreamHandler):
         self.channel = channel
 
     def _send_log(self, message: str, channel: str):
+        print("Sending log")
         # Create a new onboarding tutorial.
         onboarding_tutorial = LogMessage(channel, message)
 
