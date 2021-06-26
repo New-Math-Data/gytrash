@@ -19,13 +19,14 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: execute version script # run the run.py to get the latest data
         run: |
-          python -c 'import gytrash.__about__; print(about.version);'
-      # - name: Install pypa/build
-      #   run: >-
-      #     python -m
-      #     pip install
-      #     build
-      #     --user
+          export CURRENT_VERSION=$(python -c 'import gytrash.__about__ as about; print(about.version);')
+          bump2version --current-version $CURRENT_VERSION --new-version 0.1.0 patch gytrash/__about__.py
+      - name: Install pypa/build
+        run: >-
+          python -m
+          pip install
+          build
+          --user
       # - name: Build a binary wheel and a source tarball
       #   run: >-
       #     python -m
