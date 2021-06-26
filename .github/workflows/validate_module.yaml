@@ -28,7 +28,7 @@ jobs:
           pip install build --user
       - name: Build a binary wheel and a source tarball
         run: |
-          python -m build --sdist --wheel --outdir dist/ .
+          /opt/hostedtoolcache/Python/3.8.10/x64/bin/python -m build --sdist --wheel --outdir dist/ .
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@master
         with:
