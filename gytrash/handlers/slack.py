@@ -26,7 +26,6 @@ class SlackHandler(StreamHandler):
 
     def emit(self, message: str):
         assert isinstance(message, logging.LogRecord)
-        print("LoggingHandler received LogRecord: {}".format(message))
 
         self.format(message)
 
