@@ -111,3 +111,4 @@ working/
 
 .vscode/
 local_work/
+.secrets
