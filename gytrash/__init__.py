@@ -1,8 +1,8 @@
 import logging
 import coloredlogs
-from gystash.handlers.slack import SlackHandler
-from gystash.formatters.slack import SlackFormatter
-from gystash.filters.slack import SlackLogFilter
+from gytrash.handlers.slack import SlackHandler
+from gytrash.formatters.slack import SlackFormatter
+from gytrash.filters.slack import SlackLogFilter
 
 log = logging.getLogger("gytrash")
 
@@ -47,10 +47,10 @@ def setup_logging(
 
     if log_to_slack is True:
         sh = SlackHandler(slack_log_channel, slack_bot_token)
+        log.addHandler(sh)
         sf = SlackFormatter(log_format)
         sh.setFormatter(sf)
         sfilt = SlackLogFilter()
         sh.addFilter(sfilt)
         sh.setLevel(slack_log_level)
-        log.addHandler(sh)
 
