@@ -12,7 +12,7 @@ def setup_logging(
     *,
     log_level: int = 10,
     log_from_botocore: bool = False,
-    log_to_slack: int = 0,
+    log_to_slack: bool = False,
     slack_log_channel: str = None,
     slack_log_level: int = 20,
     slack_bot_token: str = None,
@@ -45,7 +45,7 @@ def setup_logging(
             level=log_level, logger=logging.getLogger("botocore"), fmt=log_format
         )
 
-    if bool(log_to_slack) is True:
+    if log_to_slack is True:
         sh = slack.SlackHandler(slack_log_channel, slack_bot_token)
         sf = SlackFormatter(log_format)
         sh.setFormatter(sf)
