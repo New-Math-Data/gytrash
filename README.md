@@ -36,4 +36,6 @@ gytrash.setup_logging(log, log_level=10, log_from_botocore=False, log_to_slack=T
 
 log.info("Test info message")
 log.debug("Test debug message")
+
+log.info("Test info message", extra={"notify_slack": True})  # send this log message to slack
 ```
