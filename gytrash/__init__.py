@@ -1,6 +1,8 @@
 import logging
 import coloredlogs
-from .handlers import slack
+from gytrash.handlers.slack import SlackHandler
+from gytrash.formatters.slack import SlackFormatter
+from gytrash.filters.slack import SlackLogFilter
 
 log = logging.getLogger("gytrash")
 
@@ -32,7 +34,7 @@ def setup_logging(
 
     log.setLevel(log_level)
 
-    generic_formatter = logging.Formatter(log_format)
+    # generic_formatter = logging.Formatter(log_format)
 
     coloredlogs.install(level=log_level, logger=log, fmt=log_format)
     log.debug(f"Gytrash log level: {log.getEffectiveLevel()}")
@@ -43,9 +45,12 @@ def setup_logging(
             level=log_level, logger=logging.getLogger("botocore"), fmt=log_format
         )
 
-    if log_to_slack:
-        sh = slack.SlackHandler(slack_log_channel, slack_bot_token)
-        sh.setFormatter(generic_formatter)
-        sh.setLevel(slack_log_level)
+    if log_to_slack is True:
+        sh = SlackHandler(slack_log_channel, slack_bot_token)
         log.addHandler(sh)
+        sf = SlackFormatter(log_format)
+        sh.setFormatter(sf)
+        sfilt = SlackLogFilter()
+        sh.addFilter(sfilt)
+        sh.setLevel(slack_log_level)
 

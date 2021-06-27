@@ -1,11 +1,53 @@
-from slack_sdk.web import WebClient
-from logging import StreamHandler
+from logging import (
+    StreamHandler,
+    CRITICAL,
+    ERROR,
+    WARNING,
+    INFO,
+    FATAL,
+    DEBUG,
+    NOTSET,
+    Formatter,
+)
+
 import logging
 import os
+import traceback
+
+from slack_sdk.web import WebClient
+
+ERROR_COLOR = "danger"  # color name is built in to Slack API
+WARNING_COLOR = "warning"  # color name is built in to Slack API
+INFO_COLOR = "#439FE0"
+
+COLORS = {
+    CRITICAL: ERROR_COLOR,
+    FATAL: ERROR_COLOR,
+    ERROR: ERROR_COLOR,
+    WARNING: WARNING_COLOR,
+    INFO: INFO_COLOR,
+    DEBUG: INFO_COLOR,
+    NOTSET: INFO_COLOR,
+}
 
 
 class SlackHandler(StreamHandler):
-    def __init__(self, channel: str, slack_bot_token: str = None):
+    """Slack log handler Class
+
+    Inherits:
+        logging.StreamHandler: Base log StreamHandler class.
+    """
+
+    def __init__(
+        self, channel: str, slack_bot_token: str = None, username: str = "Gytrash"
+    ):
+        """Initialize the stream handler with some specifics for slack.
+
+        Args:
+            channel (str): Slack channel to publish logs
+            slack_bot_token (str, optional): Slack bot token to use the slack published app. Defaults to None.
+            username (str, optional): Username of the Slack bot. Defaults to "Gytrash".
+        """
         StreamHandler.__init__(self)
         # Initialize a Web API client
         if slack_bot_token:
@@ -13,80 +55,38 @@ class SlackHandler(StreamHandler):
         else:
             self.slack_web_client = WebClient(token=os.environ["SLACK_BOT_TOKEN"])
         self.channel = channel
+        self.username = username
 
-    def _send_log(self, message: str, channel: str):
-        print("Sending log")
-        # Create a new onboarding tutorial.
-        onboarding_tutorial = LogMessage(channel, message)
+    def _send_log(self, message: dict):
+        """Posts the formatted message to slack via the web client.
 
-        # Get the onboarding message payload
-        slack_payload = onboarding_tutorial.get_message_payload()
+        Args:
+            message (dict): Slack message dictionary. Follows the blocks API.
+        """
+        self.slack_web_client.chat_postMessage(**message)
 
-        # Post the onboarding message in Slack
-        response = self.slack_web_client.chat_postMessage(**slack_payload)
+    def emit(self, message: "logging.LogRecord"):
+        """Emits a message from the handler.
 
-    def emit(self, message: str):
+        Args:
+            message (logging.LogRecord): Log record from the stream.
+        """
         assert isinstance(message, logging.LogRecord)
 
-        self.format(message)
+        slack_message = self.format(message)
 
         # List of LogRecord attributes expected when reading the
         # documentation of the logging module:
-
         expected_attributes = (
             "args,asctime,created,exc_info,filename,funcName,levelname,"
             "levelno,lineno,module,msecs,message,msg,name,pathname,"
             "process,processName,relativeCreated,stack_info,thread,threadName"
         )
-
         for ea in expected_attributes.split(","):
             if not hasattr(message, ea):
                 print("UNEXPECTED: LogRecord does not have the '{}' field!".format(ea))
 
-        self._send_log(message, self.channel)
+        slack_message["channel"] = self.channel
+        slack_message["username"] = self.username
 
-
-class LogMessage:
-    """Constructs the onboarding message and stores the state of which tasks were completed."""
-
-    ERROR_TYPES_EMOJI = {
-        "CRITICAL": ":interrobang:",
-        "ERROR": ":red_circle:",
-        "WARNING": ":large_orange_diamond:",
-        "INFO": ":large_blue_circle:",
-        "DEBUG": ":white_circle:",
-    }
-
-    DIVIDER_BLOCK = {"type": "divider"}
-
-    def __init__(self, channel, message):
-        self.channel = channel
-        self.message = message
-        self.username = "pythonboardingbot"
-        self.icon_emoji = self.ERROR_TYPES_EMOJI[message.levelname]
-        self.timestamp = ""
-        self.reaction_task_completed = False
-        self.pin_task_completed = False
-
-    def get_message_payload(self):
-        return {
-            "ts": self.timestamp,
-            "channel": self.channel,
-            "username": self.username,
-            "icon_emoji": self.icon_emoji,
-            "blocks": [*self._create_log_block(), self.DIVIDER_BLOCK,],
-        }
-
-    def _create_log_block(self):
-        emoji = f"{self.ERROR_TYPES_EMOJI[self.message.levelname]}"
-        text = f"```{self.message.getMessage()}```"
-        information = f"{self.message.asctime}-{self.message.name}[{self.message.process}]-{self.message.module}-{self.message.levelname}"
-        return self._get_log_block(emoji, text, information)
-
-    @staticmethod
-    def _get_log_block(emoji, text, information):
-        return [
-            {"type": "section", "text": {"type": "mrkdwn", "text": emoji}},
-            {"type": "context", "elements": [{"type": "mrkdwn", "text": information}],},
-            {"type": "section", "text": {"type": "mrkdwn", "text": text}},
-        ]
+        self._send_log(slack_message)
