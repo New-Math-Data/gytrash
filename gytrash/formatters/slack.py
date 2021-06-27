@@ -26,7 +26,7 @@ class SlackFormatter(logging.Formatter):
             record (logging.LogRecord): A log delivered from the handler.
 
         Returns:
-            [dict]: dictionary representation of a slack payload.
+            dict: dictionary representation of a slack payload.
         """
         record.asctime = self.formatTime(record)
         record.message = record.getMessage()
@@ -47,7 +47,7 @@ class SlackFormatter(logging.Formatter):
             record (logging.LogRecord): Logging record passed in for formatting.
 
         Returns:
-            [list(dict)]: Returns a list of dicts through a constructor function, _get_log_block.
+            list(dict): Returns a list of dicts through a constructor function, _get_log_block.
         """
         emoji = f"{self.ERROR_TYPES_EMOJI[record.levelname]}"
         text = f"```{record.message}```"
@@ -64,7 +64,7 @@ class SlackFormatter(logging.Formatter):
             information (str): The metadata about the logging message.
 
         Returns:
-            [list(dict)]: List of dictionaries, one for each section of the message block.
+            list(dict): List of dictionaries, one for each section of the message block.
         """
         return [
             {"type": "section", "text": {"type": "mrkdwn", "text": emoji}},

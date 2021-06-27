@@ -32,9 +32,22 @@ COLORS = {
 
 
 class SlackHandler(StreamHandler):
+    """Slack log handler Class
+
+    Inherits:
+        logging.StreamHandler: Base log StreamHandler class.
+    """
+
     def __init__(
         self, channel: str, slack_bot_token: str = None, username: str = "Gytrash"
     ):
+        """Initialize the stream handler with some specifics for slack.
+
+        Args:
+            channel (str): Slack channel to publish logs
+            slack_bot_token (str, optional): Slack bot token to use the slack published app. Defaults to None.
+            username (str, optional): Username of the Slack bot. Defaults to "Gytrash".
+        """
         StreamHandler.__init__(self)
         # Initialize a Web API client
         if slack_bot_token:
@@ -44,18 +57,20 @@ class SlackHandler(StreamHandler):
         self.channel = channel
         self.username = username
 
-    def build_trace(self, record, fallback):
-        trace = {"fallback": fallback, "color": COLORS.get(self.level, INFO_COLOR)}
+    def _send_log(self, message: dict):
+        """Posts the formatted message to slack via the web client.
 
-        if record.exc_info:
-            trace["text"] = "\n".join(traceback.format_exception(*record.exc_info))
-
-        return trace
-
-    def _send_log(self, message: str):
+        Args:
+            message (dict): Slack message dictionary. Follows the blocks API.
+        """
         self.slack_web_client.chat_postMessage(**message)
 
-    def emit(self, message: str):
+    def emit(self, message: "logging.LogRecord"):
+        """Emits a message from the handler.
+
+        Args:
+            message (logging.LogRecord): Log record from the stream.
+        """
         assert isinstance(message, logging.LogRecord)
 
         slack_message = self.format(message)
