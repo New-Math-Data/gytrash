@@ -21,8 +21,13 @@ jobs:
         run: |
           export CURRENT_VERSION=$(python setup.py --version)
           bump2version --current-version $CURRENT_VERSION patch setup.py
+          bump2version --current-version $CURRENT_VERSION patch ./source/conf.py
           export CURRENT_VERSION=$(python setup.py --version)
           echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
+      - name: Make and publish docs
+        run: |
+          make html
+          cp -a build/html/. ./docs
       - name: Build package and wheel
         run: |
           pip install build
@@ -32,11 +37,17 @@ jobs:
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
-      - name: Update resources
+      - name: Update setup
         uses: test-room-7/action-update-file@v1
         with:
           file-path: setup.py
           commit-msg: Bumped version to ${{ env.CURRENT_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update docs version
+        uses: test-room-7/action-update-file@v1
+        with:
+          file-path: source/conf.py
+          commit-msg: Bumped docs version to ${{ env.CURRENT_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Bump version and push tag
         id: tag_version

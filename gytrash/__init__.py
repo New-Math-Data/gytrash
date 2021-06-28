@@ -25,7 +25,8 @@ def setup_logging(
         log_from_botocore: bool - (keyword) Add botocore Logger if using boto
         log_to_slack: bool - (keyword) Add custom streamhandler to log to slack channel
         slack_log_channel: str - (keyword) Name of the slack channel to send logs
-        slack_log_level: inf - (keyword) slack streamhandler log level
+        slack_log_level: int - (keyword) slack streamhandler log level
+        slack_bot_token: str - (keyword) Bot token to connect to a slack app.
     Returns:
         None
     """
