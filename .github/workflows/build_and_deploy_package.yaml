@@ -27,12 +27,16 @@ jobs:
         run: |
           pip install build
           python -m build --sdist --wheel --outdir dist/ .
+      - name: Make and publish docs
+        run: |
+          make html
+          cp -a build/html/. ./docs
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@master
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
-      - name: Update resources
+      - name: Update setup
         uses: test-room-7/action-update-file@v1
         with:
           file-path: setup.py
