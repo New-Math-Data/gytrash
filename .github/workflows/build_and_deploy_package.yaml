@@ -39,24 +39,9 @@ jobs:
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
-      - name: Update setup
-        uses: test-room-7/action-update-file@v1
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file-path: setup.py
-          commit-msg: Bumped version to ${{ env.CURRENT_VERSION }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Update docs version
-        uses: test-room-7/action-update-file@v1
-        with:
-          file-path: source/conf.py
-          commit-msg: Bumped docs version to ${{ env.CURRENT_VERSION }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Update docs
-        uses: test-room-7/action-update-file@v1
-        with:
-          file-path: ./docs/**/*
-          commit-msg: Bumped docs version to ${{ env.CURRENT_VERSION }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: Bumped version to ${{ env.CURRENT_VERSION }}
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v5.2
