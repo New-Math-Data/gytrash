@@ -1,9 +1,13 @@
-Welcome to Gytrash's documentation!
+Gytrash
 ===================================
+
+Useful things for logging.
 
 .. toctree::
    :maxdepth: 4
 
+   installation
+   examples
    gytrash
 
 

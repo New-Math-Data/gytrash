@@ -22,7 +22,7 @@ copyright = "2021, Traey Hatch"
 author = "Traey Hatch"
 
 # The full version, including alpha/beta/rc tags
-release = "0.0.13"
+release = "0.0.14"
 
 import os
 import sys
