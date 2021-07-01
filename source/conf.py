@@ -10,19 +10,23 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
 
+# Add root dir to path. This allows us to build docs without
+# installing the package first.
+sys.path.insert(0, os.path.abspath(".."))
+
+import gytrash.__about__ as about
 
 # -- Project information -----------------------------------------------------
 
-project = "Gytrash"
-copyright = "2021, Traey Hatch"
-author = "Traey Hatch"
+project = about.__title__
+copyright = about.__copyright__
+author = about.__author__
 
 # The full version, including alpha/beta/rc tags
-release = "0.0.14"
+release = about.__version__
 
 import os
 import sys
