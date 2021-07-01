@@ -9,6 +9,7 @@ Useful things for logging.
    installation
    examples
    gytrash
+   attributions
 
 
 

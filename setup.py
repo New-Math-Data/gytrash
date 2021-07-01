@@ -1,13 +1,9 @@
 #!/usr/bin/env python
 
 import os
-import re
-import sys
-
 from codecs import open
 
-from setuptools import setup, find_packages
-from setuptools.command.test import test as TestCommand
+from setuptools import find_packages, setup
 
 repo_path = os.path.abspath(os.path.dirname(__file__))
 
@@ -15,6 +11,12 @@ packages = find_packages(exclude=("examples",))
 
 with open("requirements.txt") as f:
     install_requires = [line for line in f if "==" in line]
+
+with open("requirements-test.txt") as f:
+    tests_require = [line for line in f if "==" in line]
+
+with open("requirements-dev.txt") as f:
+    dev_requires = [line for line in f if "==" in line]
 
 about = {}
 with open(os.path.join(repo_path, "gytrash", "__about__.py"), "r", "utf-8") as f:
@@ -24,7 +26,7 @@ with open("README.md", "r", "utf-8") as f:
 
 setup(
     name=about["__title__"],
-    version="0.0.14",
+    version=about["__version__"],
     description=about["__description__"],
     long_description=readme,
     long_description_content_type="text/markdown",
@@ -38,6 +40,7 @@ setup(
     python_requires=">=3.7",
     install_requires=install_requires,
     setup_requires=install_requires,
+    extras_require={"test": tests_require, "dev": dev_requires,},
     license=about["__license__"],
     zip_safe=False,
     classifiers=[

@@ -1,3 +1,4 @@
 bump2version==1.0.1
 coloredlogs==14.0
 slack-sdk==3.0.0b1
+boto3==1.17.102
