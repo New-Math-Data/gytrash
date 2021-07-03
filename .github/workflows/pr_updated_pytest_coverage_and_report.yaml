@@ -27,7 +27,7 @@ jobs:
       - name: execute version script # run the run.py to get the latest data
         run: |
           if ["$PR_NUMBER" != ""]; then export PR_NUMBER=999999; fi
-          bump2version build
+          bump2version post
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Bumped version to ${{ env.CURRENT_VERSION }}
