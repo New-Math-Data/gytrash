@@ -32,7 +32,7 @@ jobs:
           cp -a build/html/. ./docs
       - name: Build package and wheel
         run: |
-          pip install build
+          pip install build, wheel
           python -m build -n --sdist --wheel --outdir dist/ .
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@master
