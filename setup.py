@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 from semya import Semya
 
 seed = Semya(
