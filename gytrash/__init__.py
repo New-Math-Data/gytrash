@@ -3,6 +3,7 @@ import coloredlogs
 from gytrash.handlers.slack import SlackHandler
 from gytrash.formatters.slack import SlackFormatter
 from gytrash.filters.slack import SlackLogFilter
+from gytrash.__about__ import *
 
 log = logging.getLogger("gytrash")
 
