@@ -25,9 +25,11 @@ jobs:
       #     if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
       - name: execute version script # run the run.py to get the latest data
         run: |
-          pip install bump2version
-          bump2version --allow-dirty patch
-          cat ./gytrash/__about__.py
+          echo "PR NUMBER"
+          echo ${{ env.PR_NUMBER }}
+          # pip install bump2version
+          # bump2version --allow-dirty patch
+          # cat ./gytrash/__about__.py
       # - name: Build package and wheel
       #   run: |
       #     pip install build
