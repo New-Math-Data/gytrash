@@ -35,11 +35,6 @@ jobs:
           pip install build
           pip install wheel
           python -m build -n --sdist --wheel --outdir dist/ .
-      # - name: Publish distribution 📦 to Test PyPI
-      #   uses: pypa/gh-action-pypi-publish@master
-      #   with:
-      #     password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-      #     repository_url: https://test.pypi.org/legacy/
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Bumped version to ${{ env.CURRENT_VERSION }}
