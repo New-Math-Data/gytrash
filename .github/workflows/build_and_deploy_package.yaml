@@ -33,6 +33,7 @@ jobs:
       - name: Build package and wheel
         run: |
           pip install build
+          pip install semya==0.0.6
           python -m build --sdist --wheel --outdir dist/ .
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@master
