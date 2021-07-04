@@ -6,7 +6,7 @@ on:
     types:
       - opened
     branches: 
-      - 'feature**'
+      - 'feature/**'
 jobs:
   build:
     runs-on: ubuntu-latest
