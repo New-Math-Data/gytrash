@@ -1,12 +1,19 @@
 # Gytrash
-A logging setup module for Python. When setting up logging functionality for new projects I noticed I was always following the same pattern. 
+
+A logging setup module for Python. When setting up logging functionality for new projects I noticed I was always following the same pattern.
 
 Decided to put these practices into a module. The module sets up a logger using `coloredlogs`. You can attach the botocore logs, if you are a regular user of boto3. And the logger can easily ship logging messages to slack.
+
+Bumping to v0.0.18
+
 ## Installation
+
 `pip install gytrash`
 
 ## Examples
+
 ### Simple logging setup
+
 ```
 import gytrash
 import logging
@@ -19,14 +26,19 @@ log.debug("Test debug message")
 ```
 
 ### Setup logger for use with Slack
+
 To use gytrash to ship logging messages to slack, first setup a slack app using this [walkthrough](https://github.com/slackapi/python-slack-sdk/blob/main/tutorial/01-creating-the-slack-app.md)
 
 Once you have generated the bot token, save it as an environment variable.
+
 ### Set Slack Environment Variables
+
 `export SLACK_BOT_TOKEN="<BOT TOKEN>"`
 
 Finally setup gytrash using the extended parameters.
+
 ### Import Gytrash and setup logger to use Slack
+
 ```
 import gytrash
 import logging
