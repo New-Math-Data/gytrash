@@ -1,12 +1,12 @@
 # This workflow will install dependencies, create coverage tests and run Pytest Coverage Commentator
 # For more information see: https://github.com/coroo/pytest-coverage-commentator
-name: test-build-pytest-coverage-commentator-PR-open
+name: test-build-pytest-coverage-commentator-PR-synchronize
 on:
   pull_request:
     types:
-      - opened
+      - synchronize
     branches: 
-      - '*'
+      - 'feature**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,8 +27,7 @@ jobs:
       - name: execute version script # run the run.py to get the latest data
         run: |
           if ["$PR_NUMBER" != ""]; then export PR_NUMBER=999999; fi
-          bump2version release
-          bump2version --allow-dirty build
+          bump2version post
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Bumped version to ${{ env.CURRENT_VERSION }}
