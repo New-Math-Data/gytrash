@@ -28,8 +28,8 @@ jobs:
         run: |
           if ["$PR_NUMBER" != ""]; then export PR_NUMBER=999999; fi
           bump2version patch
-          bump2version release
-          bump2version release
+          bump2version --allow-dirty release
+          bump2version --allow-dirty release
           bump2version --allow-dirty build
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
