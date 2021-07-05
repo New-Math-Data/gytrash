@@ -1,4 +1,4 @@
-name: Build and Deploy Gytrash CI
+name: release_pr_merged_to_main_build_and_deploy_package
 
 on:
   push:
