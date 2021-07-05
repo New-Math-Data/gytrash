@@ -9,8 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env: 
-      PR_NUMBER: ${{ github.event.number }}
-      PR_TEST: "Test"
+      PR_NUMBER: 1
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.7
@@ -24,17 +23,16 @@ jobs:
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
       - name: execute version script # run the run.py to get the latest data
         run: |
-          if ["$PR_NUMBER" != ""]; then export PR_NUMBER=999999; fi
-          if grep -Fq "rc${PR_NUMBER}" ./gytrash/__about__.py
+          if grep -Fq ".rc1" ./gytrash/__about__.py
           then
               # Version number should already contain "rc", code has already been pushed to pypi for this release branch.
               echo "Release branch already contains merged code."
+              bump2version --allow-dirty build
           else
               # First PR to this Release branch. Bump the release to "rc".
               bump2version --allow-dirty release
               bump2version --allow-dirty build
           fi
-          bump2version --allow-dirty post
           export CURRENT_VERSION=$(python setup.py --version)
           echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
       - name: Build package and wheel
