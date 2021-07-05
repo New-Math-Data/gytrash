@@ -28,9 +28,13 @@ jobs:
         run: |
           if ["$PR_NUMBER" != ""]; then export PR_NUMBER=999999; fi
           bump2version patch
+          cat ./gytrash/about.py
           bump2version --allow-dirty release
+          cat ./gytrash/about.py
           bump2version --allow-dirty release
+          cat ./gytrash/about.py
           bump2version --allow-dirty build
+          cat ./gytrash/about.py
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Bumped version to ${{ env.CURRENT_VERSION }}
