@@ -10,7 +10,7 @@ repo_path = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, repo_path)
 from gytrash import __about__ as about  # noqa
 
-packages = find_packages(where=repo_path, include=["gytrash"], exclude=["examples",],)
+packages = find_packages(exclude=["examples",],)
 
 # Open requirements files to grab package dependencies
 with open("requirements.txt") as f:
