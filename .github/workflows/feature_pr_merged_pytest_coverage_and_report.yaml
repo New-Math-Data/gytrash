@@ -1,12 +1,10 @@
 # This workflow will install dependencies, create coverage tests and run Pytest Coverage Commentator
 # For more information see: https://github.com/coroo/pytest-coverage-commentator
-name: release-pr-syncrhonize-pytest-coverage-report-pypi
+name: test-build-pytest-coverage-commentator-PR-synchronize
 on:
-  pull_request:
-    types:
-      - synchronize
+  push:
     branches: 
-      - 'main'
+      - 'release/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,15 +25,32 @@ jobs:
       - name: execute version script # run the run.py to get the latest data
         run: |
           if ["$PR_NUMBER" != ""]; then export PR_NUMBER=999999; fi
-          bump2version post
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Bumped version to ${{ env.CURRENT_VERSION }}
+          if grep -Fq "rc${PR_NUMBER}" ./gytrash/__about__.py
+          then
+              # Version number should already contain "rc", code has already been pushed to pypi for this release branch.
+              echo "Release branch already contains merged code."
+          else
+              # First PR to this Release branch. Bump the release to "rc".
+              bump2version --allow-dirty release
+              bump2version --allow-dirty build
+          fi
+          bump2version --allow-dirty post
+          export CURRENT_VERSION=$(python setup.py --version)
+          echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
       - name: Build package and wheel
         run: |
           pip install build
           pip install wheel
           python -m build -n --sdist --wheel --outdir dist/ .
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Bumped version to ${{ env.CURRENT_VERSION }}
+      - name: Tag version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          custom_tag: ${{ env.CURRENT_VERSION }}
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@master
         with:

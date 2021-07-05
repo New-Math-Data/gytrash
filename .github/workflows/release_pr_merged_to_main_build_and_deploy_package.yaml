@@ -1,0 +1,56 @@
+name: Build and Deploy Gytrash CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install pypa/build
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+      - name: execute version script # run the run.py to get the latest data
+        run: |
+          bump2version --allow-dirty release
+          export CURRENT_VERSION=$(python setup.py --version)
+          echo "CURRENT_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
+      - name: Make and publish docs
+        run: |
+          make html
+          cp -a build/html/. ./docs
+      - name: Build package and wheel
+        run: |
+          pip install build
+          pip install wheel
+          python -m build -n --sdist --wheel --outdir dist/ .
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Bumped version to ${{ env.CURRENT_VERSION }}
+      - name: Tag version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          custom_tag: ${{ env.CURRENT_VERSION }}
+      - name: Create a GitHub release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+      - name: Publish distribution 📦 to PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.GYTRASH_PYPI_API_TOKEN }}

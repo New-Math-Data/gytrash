@@ -27,12 +27,10 @@ jobs:
       - name: execute version script # run the run.py to get the latest data
         run: |
           if ["$PR_NUMBER" != ""]; then export PR_NUMBER=999999; fi
+          # When this PR is opened, bump version to "<NEXT MINOR VERSION>.a{PR_NUMBER}.post1"
           bump2version patch
-          cat gytrash/__about__.py
           bump2version --allow-dirt release
-          cat gytrash/__about__.py
           bump2version --allow-dirty build
-          cat gytrash/__about__.py
       - name: Build package and wheel
         run: |
           pip install build
