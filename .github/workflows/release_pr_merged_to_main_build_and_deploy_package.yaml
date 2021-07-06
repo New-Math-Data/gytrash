@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: 1
     steps:
       - uses: actions/checkout@v2
       - name: setup python
