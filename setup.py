@@ -1,16 +1,13 @@
 #!/usr/bin/env python
 
+import configparser
 import os
 from codecs import open
-import configparser
 
 from setuptools import find_packages, setup
 
 # Import the package module code from local directory.
 repo_path = os.path.abspath(os.path.dirname(__file__))
-# sys.path.insert(0, repo_path)
-
-# from gytrash import __about__ as about  # noqa
 
 packages = find_packages(exclude=("examples",))
 
