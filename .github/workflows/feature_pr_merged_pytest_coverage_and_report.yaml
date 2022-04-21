@@ -27,7 +27,7 @@ jobs:
           then
               # Version number should already contain "rc", code has already been pushed to pypi for this release branch.
               echo "Release branch already contains merged code."
-              bump2version --allow-dirty build
+              bump2version --allow-dirty release
           else
               # First PR to this Release branch. Bump the release to "rc".
               bump2version --allow-dirty release
