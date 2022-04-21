@@ -1,3 +1,8 @@
-from . import slack
+from .slack import SlackHandler
+from .teams import TeamsHandler, TeamsQueueHandler
 
-__all__ = ["slack"]
+__all__ = [
+    "SlackHandler",
+    "TeamsQueueHandler",
+    "TeamsHandler",
+]
