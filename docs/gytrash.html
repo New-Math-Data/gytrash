@@ -221,9 +221,9 @@
         </li>
         <li class="md-nav__item"><a href="#submodules" class="md-nav__link">Submodules</a>
         </li>
-        <li class="md-nav__item"><a href="#module-gytrash.logging_mixin" class="md-nav__link">gytrash.logging_mixin module</a>
+        <li class="md-nav__item"><a href="#gytrash-logging-mixin-module" class="md-nav__link">gytrash.logging_mixin module</a>
         </li>
-        <li class="md-nav__item"><a href="#module-gytrash" class="md-nav__link">Module contents</a>
+        <li class="md-nav__item"><a href="#module-contents" class="md-nav__link">Module contents</a>
         </li></ul>
             </nav>
         </li>
@@ -249,20 +249,20 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="gytrash.filters.html">gytrash.filters package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="gytrash.filters.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gytrash.filters.html#module-gytrash.filters.slack">gytrash.filters.slack module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gytrash.filters.html#module-gytrash.filters">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gytrash.filters.html#gytrash-filters-slack-module">gytrash.filters.slack module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gytrash.filters.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="gytrash.formatters.html">gytrash.formatters package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="gytrash.formatters.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gytrash.formatters.html#module-gytrash.formatters.slack">gytrash.formatters.slack module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gytrash.formatters.html#module-gytrash.formatters">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gytrash.formatters.html#gytrash-formatters-slack-module">gytrash.formatters.slack module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gytrash.formatters.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="gytrash.handlers.html">gytrash.handlers package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="gytrash.handlers.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gytrash.handlers.html#module-gytrash.handlers.slack">gytrash.handlers.slack module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gytrash.handlers.html#module-gytrash.handlers">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gytrash.handlers.html#gytrash-handlers-slack-module">gytrash.handlers.slack module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gytrash.handlers.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -271,57 +271,11 @@
 <section id="submodules">
 <h2 id="submodules">Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </section>
-<section id="module-gytrash.logging_mixin">
-<span id="gytrash-logging-mixin-module"></span><h2 id="module-gytrash.logging_mixin">gytrash.logging_mixin module<a class="headerlink" href="#module-gytrash.logging_mixin" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="gytrash.logging_mixin.LoggingMixin">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gytrash.logging_mixin.</span></span><span class="sig-name descname"><span class="pre">LoggingMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gytrash.logging_mixin.LoggingMixin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Convenience super-class to have a logger configured with the class name</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="gytrash.logging_mixin.LoggingMixin.log">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">log</span></span><em class="property"><span class="pre">:</span> <span class="pre">logging.Logger</span></em><a class="headerlink" href="#gytrash.logging_mixin.LoggingMixin.log" title="Permalink to this definition">¶</a></dt>
-<dd><p>A logger object.
-:returns: Logger</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="gytrash.logging_mixin.LoggingMixin.set_context">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">set_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gytrash.logging_mixin.LoggingMixin.set_context" title="Permalink to this definition">¶</a></dt>
-<dd><p>Walks the tree of loggers and tries to set the context for each handler.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>logger</strong> – logger to traverse</p></li>
-<li><p><strong>value</strong> – value to set</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-</dd></dl>
+<section id="gytrash-logging-mixin-module">
+<h2 id="gytrash-logging-mixin-module">gytrash.logging_mixin module<a class="headerlink" href="#gytrash-logging-mixin-module" title="Permalink to this headline">¶</a></h2>
 </section>
-<section id="module-gytrash">
-<span id="module-contents"></span><h2 id="module-gytrash">Module contents<a class="headerlink" href="#module-gytrash" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gytrash.setup_logging">
-<span class="sig-prename descclassname"><span class="pre">gytrash.</span></span><span class="sig-name descname"><span class="pre">setup_logging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_from_botocore</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_to_slack</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slack_log_channel</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slack_log_level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slack_bot_token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#gytrash.setup_logging" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create the Logging handler for the CLI. This setups a log handler that support logging in color.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>log</strong> – Root logging object.</p></li>
-<li><p><strong>log_level</strong> – int - (keyword) console streamhandler log level</p></li>
-<li><p><strong>log_from_botocore</strong> – bool - (keyword) Add botocore Logger if using boto</p></li>
-<li><p><strong>log_to_slack</strong> – bool - (keyword) Add custom streamhandler to log to slack channel</p></li>
-<li><p><strong>slack_log_channel</strong> – str - (keyword) Name of the slack channel to send logs</p></li>
-<li><p><strong>slack_log_level</strong> – int - (keyword) slack streamhandler log level</p></li>
-<li><p><strong>slack_bot_token</strong> – str - (keyword) Bot token to connect to a slack app.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
+<section id="module-contents">
+<h2 id="module-contents">Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </section>
 </section>
 
