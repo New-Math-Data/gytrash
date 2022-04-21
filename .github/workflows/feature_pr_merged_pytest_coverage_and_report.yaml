@@ -23,7 +23,7 @@ jobs:
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
       - name: execute version script # run the run.py to get the latest data
         run: |
-          if grep -Fq ".rc1" ./pyproject.toml
+          if grep -Fq ".rc" ./pyproject.toml
           then
               # Version number should already contain "rc", code has already been pushed to pypi for this release branch.
               echo "Release branch already contains merged code."
