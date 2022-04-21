@@ -219,9 +219,9 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#submodules" class="md-nav__link">Submodules</a>
         </li>
-        <li class="md-nav__item"><a href="#gytrash-handlers-slack-module" class="md-nav__link">gytrash.handlers.slack module</a>
+        <li class="md-nav__item"><a href="#module-gytrash.handlers.slack" class="md-nav__link">gytrash.handlers.slack module</a>
         </li>
-        <li class="md-nav__item"><a href="#module-contents" class="md-nav__link">Module contents</a>
+        <li class="md-nav__item"><a href="#module-gytrash.handlers" class="md-nav__link">Module contents</a>
         </li></ul>
             </nav>
         </li>
@@ -244,11 +244,88 @@
 <section id="submodules">
 <h2 id="submodules">Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </section>
-<section id="gytrash-handlers-slack-module">
-<h2 id="gytrash-handlers-slack-module">gytrash.handlers.slack module<a class="headerlink" href="#gytrash-handlers-slack-module" title="Permalink to this headline">¶</a></h2>
+<section id="module-gytrash.handlers.slack">
+<span id="gytrash-handlers-slack-module"></span><h2 id="module-gytrash.handlers.slack">gytrash.handlers.slack module<a class="headerlink" href="#module-gytrash.handlers.slack" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gytrash.handlers.slack.SlackHandler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gytrash.handlers.slack.</span></span><span class="sig-name descname"><span class="pre">SlackHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slack_bot_token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Gytrash'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gytrash.handlers.slack.SlackHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">logging.StreamHandler</span></code></p>
+<p>Slack log handler Class</p>
+<dl class="simple">
+<dt>Inherits:</dt><dd><p>logging.StreamHandler: Base log StreamHandler class.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gytrash.handlers.slack.SlackHandler.emit">
+<span class="sig-name descname"><span class="pre">emit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">logging.LogRecord</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gytrash.handlers.slack.SlackHandler.emit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Emits a message from the handler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>message</strong> (<em>logging.LogRecord</em>) – Log record from the stream.</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
 </section>
-<section id="module-contents">
-<h2 id="module-contents">Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<section id="module-gytrash.handlers">
+<span id="module-contents"></span><h2 id="module-gytrash.handlers">Module contents<a class="headerlink" href="#module-gytrash.handlers" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gytrash.handlers.SlackHandler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gytrash.handlers.</span></span><span class="sig-name descname"><span class="pre">SlackHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slack_bot_token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Gytrash'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gytrash.handlers.SlackHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">logging.StreamHandler</span></code></p>
+<p>Slack log handler Class</p>
+<dl class="simple">
+<dt>Inherits:</dt><dd><p>logging.StreamHandler: Base log StreamHandler class.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gytrash.handlers.SlackHandler.emit">
+<span class="sig-name descname"><span class="pre">emit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">logging.LogRecord</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gytrash.handlers.SlackHandler.emit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Emits a message from the handler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>message</strong> (<em>logging.LogRecord</em>) – Log record from the stream.</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="gytrash.handlers.TeamsHandler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gytrash.handlers.</span></span><span class="sig-name descname"><span class="pre">TeamsHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gytrash.handlers.TeamsHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Handler</span></code></p>
+<p>Logging handler for Microsoft Teams webhook integration.</p>
+<p>This handler blocks operation. Use non-blocking NBTeamsHandler for less
+impact on your application performance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gytrash.handlers.TeamsHandler.emit">
+<span class="sig-name descname"><span class="pre">emit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">logging.LogRecord</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gytrash.handlers.TeamsHandler.emit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do whatever it takes to actually log the specified logging record.</p>
+<p>This version is intended to be implemented by subclasses and so
+raises a NotImplementedError.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="gytrash.handlers.TeamsHandler.format">
+<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">logging.LogRecord</span></span></em><span class="sig-paren">)</span> → <span class="pre">str</span><a class="headerlink" href="#gytrash.handlers.TeamsHandler.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format the specified record.</p>
+<p>If a formatter is set, use it. Otherwise, use the default formatter
+for the module.</p>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="gytrash.handlers.TeamsQueueHandler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gytrash.handlers.</span></span><span class="sig-name descname"><span class="pre">TeamsQueueHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gytrash.handlers.TeamsQueueHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">logging.handlers.QueueHandler</span></code></p>
+<p>Non-blocking logging handler for Microsoft Teams webhook integration.</p>
+<p>This handler reduces impact on your application compared to the (blocking)
+TeamsHandler.</p>
+<p>Queue-based implementation from
+<a class="reference external" href="https://docs.python.org/3/howto/logging-cookbook.html#dealing-with-handlers-that-block">https://docs.python.org/3/howto/logging-cookbook.html#dealing-with-handlers-that-block</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gytrash.handlers.TeamsQueueHandler.setFormatter">
+<span class="sig-name descname"><span class="pre">setFormatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gytrash.handlers.TeamsQueueHandler.setFormatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the formatter for this handler.</p>
+</dd></dl>
+</dd></dl>
 </section>
 </section>
 
