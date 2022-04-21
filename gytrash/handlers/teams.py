@@ -42,8 +42,6 @@ class TeamsHandler(Handler):
     def emit(self, record: LogRecord):
         try:
             data = self.format(record)
-            print("data")
-            print(data)
             requests.post(
                 url=self.url, headers={"Content-Type": "application/json"}, data=data
             )

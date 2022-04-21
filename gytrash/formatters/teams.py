@@ -59,8 +59,7 @@ class Office365CardFormatter(TeamsCardsFormatter):
                 "@context": "https://schema.org/extensions",
                 "@type": "MessageCard",
                 "title": f"{record.levelname.title()} in {record.module}",
-                # "summary": f"{record.getMessage()}",
-                "summary": "test summary",
+                "summary": f"{record.getMessage()}",
                 "sections": [{"facts": self._build_facts_list(record)}],
                 # Fallback to INFO color if needed
                 "themeColor": self._color_map[record.levelname],
