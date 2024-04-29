@@ -1,2 +1,0 @@
-slack_sdk==3.15.2
-coloredlogs==15.0.1

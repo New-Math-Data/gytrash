@@ -112,3 +112,6 @@ working/
 .vscode/
 local_work/
 .secrets
+
+coverage/
+poetry.toml

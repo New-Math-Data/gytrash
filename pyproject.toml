@@ -1,12 +1,33 @@
-[default]
-__title__="gytrash"
-__description__="Useful things for Logging."
-__url__="http://github.com/trejas/gytrash"
-__version__="0.0.21"
-__author__="Traey Hatch"
-__author_email__="thatch@newmathdata.com"
-__license__="Apache 2.0"
-__copyright__="Copyright 2020 New Math Data"
+[tool.poetry]
+name = "gytrash"
+version = "0.0.21"
+description = "A python logging library with plugin integrations."
+readme = "README.md"
+license = "Apache 2.0"
+authors = ["Traey Hatch - trejas <4763901+trejas@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10.4"
+slack-sdk = "3.15.2"
+coloredlogs = "15.0.1"
+requests = "^2.31.0"
+sphinx = "^7.3.7"
+sphinx-material = "^0.0.36"
+
+[project.urls]
+Homepage = "http://github.com/trejas/gytrash"
+Source = "https://github.com/trejas/gytrash"
 
 [tool.isort]
 profile="black"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.2"
+bump2version = "1.0.1"
+pre-commit = "2.13.0"
+pytest = "^8.2.0"
+pytest-cov = "^5.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

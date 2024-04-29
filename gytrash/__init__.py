@@ -1,4 +1,5 @@
 import logging
+from typing import Optional
 
 import coloredlogs
 
@@ -9,7 +10,7 @@ from gytrash.handlers import SlackHandler, TeamsHandler, TeamsQueueHandler
 
 log = logging.getLogger("gytrash")
 
-
+# Test using pytest
 def setup_logging(
     log,
     *,
@@ -17,10 +18,10 @@ def setup_logging(
     log_from_botocore: bool = False,
     log_to_slack: bool = False,
     log_to_teams: bool = False,
-    slack_log_channel: str = None,
+    slack_log_channel: Optional[str] = None,
     slack_log_level: int = 20,
-    slack_bot_token: str = None,
-    teams_url: str = None,
+    slack_bot_token: Optional[str] = None,
+    teams_url: Optional[str] = None,
     teams_log_level: int = 20,
     teams_nonblocking: bool = True,
     teams_card_formatter: bool = True,
@@ -73,7 +74,7 @@ def setup_logging(
 
     if log_to_teams is True:
         if teams_nonblocking is True:
-            th = TeamsQueueHandler(url=teams_url, level=teams_log_level)
+            th = TeamsQueueHandler(url=teams_url, level=teams_log_level) # type: TeamsQueueHandler | TeamsHandler
         else:
             th = TeamsHandler(url=teams_url, level=teams_log_level)
 
