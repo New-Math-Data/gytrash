@@ -39,7 +39,7 @@ class SlackHandler(StreamHandler):
     """
 
     def __init__(
-        self, channel: str, slack_bot_token: str = None, username: str = "Gytrash"
+        self, channel: str, slack_bot_token: str | None = None, username: str = "Gytrash"
     ):
         """Initialize the stream handler with some specifics for slack.
 
@@ -63,7 +63,7 @@ class SlackHandler(StreamHandler):
         Args:
             message (dict): Slack message dictionary. Follows the blocks API.
         """
-        self.slack_web_client.chat_postMessage(**message)
+        self.slack_web_client.chat_postMessage(**message, channel=self.channel)
 
     def emit(self, message: "logging.LogRecord"):
         """Emits a message from the handler.
