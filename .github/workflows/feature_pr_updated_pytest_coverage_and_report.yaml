@@ -18,11 +18,20 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.10.4
-      - name: Install pypa/build
-        run: |
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
-          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+      # - name: Install pypa/build
+      #   run: |
+      #     if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      #     if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
+      #     if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+      - name: Install and configure Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.5.1
+          virtualenvs-create: true
+          virtualenvs-in-project: false
+          virtualenvs-path: ~/my-custom-path
+          installer-parallel: true
+          installation-arguments: --with dev
       - name: execute version script # run the run.py to get the latest data
         run: |
           if ["$PR_NUMBER" != ""]; then export PR_NUMBER=999999; fi
