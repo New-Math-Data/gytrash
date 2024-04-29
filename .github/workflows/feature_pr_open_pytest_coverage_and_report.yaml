@@ -32,6 +32,8 @@ jobs:
           virtualenvs-path: ~/my-custom-path
           installer-parallel: true
           installation-arguments: --with dev
+      - name: Install project
+        run: poetry install --with dev
       - name: execute version script # run the run.py to get the latest data
         run: |
           if ["$PR_NUMBER" != ""]; then export PR_NUMBER=999999; fi
