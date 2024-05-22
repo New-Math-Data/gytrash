@@ -17,13 +17,14 @@ def setup_logging(
     log_from_botocore: bool = False,
     log_to_slack: bool = False,
     log_to_teams: bool = False,
-    slack_log_channel: str = None,
+    slack_log_channel: str | None = None,
     slack_log_level: int = 20,
-    slack_bot_token: str = None,
-    teams_url: str = None,
+    slack_bot_token: str | None = None,
+    teams_url: str | None = None,
     teams_log_level: int = 20,
     teams_nonblocking: bool = True,
     teams_card_formatter: bool = True,
+    logging_conf_file_path: str | None = None,
 ) -> None:
     """Create the Logging handler for the CLI.
         This setups a log handler that support logging in color.
@@ -43,6 +44,7 @@ def setup_logging(
                                   queue for log delivery.
         teams_card_formatter: bool - (keyword) Boolean for using the Office 365
                                      card format when delivering logs
+        logging_conf_file_path: str - (keyword) Path to a logging configuration
     Returns:
         None
     """
@@ -84,3 +86,8 @@ def setup_logging(
         log.addHandler(th)
         tfilt = MessengerLogFilter()
         th.addFilter(tfilt)
+
+    if logging_conf_file_path:
+        logging.config.fileConfig(
+            logging_conf_file_path, disable_existing_loggers=False
+        )
